@@ -3,57 +3,100 @@ import React, { useState } from 'react';
 const systemDesignTopics = [
   {
     id: 'recommendation-system',
-    title: 'Recommendation System (Netflix-style)',
-    description: 'Design a scalable recommendation system for personalized content suggestions.',
+    title: 'Netflix-Style Recommendation System',
+    description: 'Design a scalable recommendation system for personalized content suggestions',
     components: [
-      { name: 'Data Ingestion', description: 'Collect user interactions (views, likes, watch time), content metadata, and contextual data.' },
-      { name: 'Feature Store', description: 'Store and manage user features (demographics, behavior), content features (genre, cast, embeddings), and interaction features.' },
-      { name: 'Model Training', description: 'Train collaborative filtering, content-based, and hybrid models using matrix factorization, deep learning, or graph-based approaches.' },
-      { name: 'Serving', description: 'Deploy models to generate real-time recommendations with low latency using caching and approximate nearest neighbor search.' }
-    ],
-    considerations: [
-      'Handle cold start problem for new users and content',
-      'Balance exploration vs exploitation (bandit algorithms)',
-      'Ensure diversity and novelty in recommendations',
-      'Monitor for feedback loops and bias amplification',
-      'Scale to millions of users and items with sub-second latency'
+      {
+        name: 'Data Ingestion',
+        description: 'Collect user interactions (views, likes, watch time), content metadata, and contextual data',
+        icon: '📥',
+        details: [
+          'Real-time streaming via Kafka/Kinesis',
+          'Batch processing of historical data',
+          'Schema validation and data quality checks'
+        ]
+      },
+      {
+        name: 'Feature Store',
+        description: 'Centralized repository for engineered features used by models',
+        icon: '🏪',
+        details: [
+          'User features: watch history, genre preferences, time-of-day patterns',
+          'Content features: embeddings, popularity, freshness, genre tags',
+          'Contextual features: device type, location, session context'
+        ]
+      },
+      {
+        name: 'Model Training',
+        description: 'Hybrid approach combining collaborative filtering and content-based methods',
+        icon: '🎯',
+        details: [
+          'Matrix factorization (SVD, ALS) for collaborative signals',
+          'Deep learning models (DNN, CNN) for content understanding',
+          'Hybrid models combining multiple approaches',
+          'Regular retraining pipeline with A/B testing'
+        ]
+      },
+      {
+        name: 'Serving Layer',
+        description: 'Low-latency API for generating real-time recommendations',
+        icon: '🚀',
+        details: [
+          'Online feature retrieval from feature store',
+          'Model inference with caching (Redis)',
+          'Diversity and business rule filtering',
+          'Fallback to popular/new content when needed'
+        ]
+      }
     ]
   },
   {
     id: 'ml-pipeline',
     title: 'End-to-End ML Pipeline',
-    description: 'Design a robust, automated machine learning pipeline for model development and deployment.',
+    description: 'Design a robust ML pipeline for model development, deployment, and monitoring',
     components: [
-      { name: 'Data Collection & Validation', description: 'Ingest raw data from various sources, validate quality, and store in data lake/warehouse.' },
-      { name: 'Feature Engineering', description: 'Transform raw data into meaningful features using batch and streaming processing.' },
-      { name: 'Model Training & Experimentation', description: 'Train models, track experiments (metrics, parameters), and select best performers.' },
-      { name: 'Model Validation & Testing', description: 'Rigorously test models on holdout data, check for bias, and validate business impact.' },
-      { name: 'Model Deployment & Monitoring', description: 'Deploy to production, monitor performance, data drift, and trigger retraining when needed.' }
-    ],
-    considerations: [
-      'Implement version control for data, features, and models',
-      'Use CI/CD for automated testing and deployment',
-      'Ensure reproducibility and auditability',
-      'Handle concept drift and data quality issues',
-      'Provide rollback mechanisms and A/B testing framework'
-    ]
-  },
-  {
-    id: 'real-time-prediction',
-    title: 'Real-Time Prediction Service',
-    description: 'Design a low-latency service for real-time ML predictions (e.g., fraud detection, click-through rate).',
-    components: [
-      { name: 'Input Processing', description: 'Receive and validate incoming requests, extract features, and handle missing data.' },
-      { name: 'Feature Retrieval', description: 'Fetch precomputed features from cache or feature store with low latency.' },
-      { name: 'Model Inference', description: 'Run the ML model to generate predictions with optimized latency.' },
-      { name: 'Post-processing & Response', description: 'Apply business rules, format response, and return to caller.' }
-    ],
-    considerations: [
-      'Achieve sub-100ms latency for high-throughput scenarios',
-      'Implement caching layers for frequently accessed features',
-      'Use model optimization techniques (quantization, pruning, distillation)',
-      'Implement circuit breakers and fallback mechanisms',
-      'Monitor latency, error rates, and prediction distributions'
+      {
+        name: 'Data Pipeline',
+        description: 'Ingest, clean, and transform raw data into training-ready format',
+        icon: '📊',
+        details: [
+          'ETL/ELT processes with Airflow/Prefect',
+          'Data validation and quality monitoring',
+          'Feature engineering and selection'
+        ]
+      },
+      {
+        name: 'Model Development',
+        description: 'Experiment tracking and model iteration',
+        icon: '🔬',
+        details: [
+          'Experiment tracking with MLflow/Weights & Biases',
+          'Hyperparameter tuning (Optuna, Ray Tune)',
+          'Model versioning and registry'
+        ]
+      },
+      {
+        name: 'Deployment',
+        description: 'Deploy models to production with rollback capability',
+        icon: '🚀',
+        details: [
+          'Containerization with Docker',
+          'Orchestration with Kubernetes',
+          'Blue-green or canary deployments',
+          'A/B testing framework'
+        ]
+      },
+      {
+        name: 'Monitoring & Maintenance',
+        description: 'Track model performance and data drift',
+        icon: '📈',
+        details: [
+          'Prediction and feature distribution monitoring',
+          'Data drift and concept drift detection',
+          'Automated retraining triggers',
+          'Performance dashboards and alerts'
+        ]
+      }
     ]
   }
 ];
@@ -65,23 +108,20 @@ const SystemDesign: React.FC = () => {
     <section className="space-y-8">
       <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 p-6">
         <h2 className="text-2xl font-bold text-a855f7 mb-4">System Design for ML</h2>
-        <p className="text-gray-300 mb-6">Learn to design scalable ML systems for real-world applications.</p>
+        <p className="text-gray-300 mb-6">Architect scalable ML systems for production environments</p>
         
-        <div className="space-y-4">
+        <div className="flex gap-4 mb-6">
           {systemDesignTopics.map((topic) => (
             <button
               key={topic.id}
               onClick={() => setActiveTopic(topic.id)}
-              className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 ${
+              className={`px-4 py-2 rounded-lg transition-all duration-200 ${
                 activeTopic === topic.id
-                  ? 'bg-a855f7/20 border border-a855f7/50 text-a855f7'
-                  : 'bg-gray-800/30 border border-gray-700/50 hover:bg-gray-800/40'
+                  ? 'bg-a855f7/20 border-a855f7 text-a855f7'
+                  : 'bg-gray-800/30 border-gray-700/50 hover:bg-gray-800/40 text-gray-300'
               }`}
             >
-              <div className="flex justify-between items-start">
-                <h3 className="font-semibold">{topic.title}</h3>
-                <span className="text-sm text-gray-400">{activeTopic === topic.id ? '▼' : '▶'}</span>
-              </div>
+              {topic.title}
             </button>
           ))}
         </div>
@@ -96,28 +136,23 @@ const SystemDesign: React.FC = () => {
             <h3 className="text-xl font-bold text-a855f7 mb-4">{topic.title}</h3>
             <p className="text-gray-300 mb-6">{topic.description}</p>
             
-            <div className="mb-6">
-              <h4 className="font-semibold text-gray-200 mb-2">Key Components:</h4>
-              <div className="space-y-3">
-                {topic.components.map((component, index) => (
-                  <div key={index} className="flex">
-                    <div className="flex-shrink-0 h-3 w-3 bg-a855f7 rounded-full mr-3"></div>
+            <div className="space-y-6">
+              {topic.components.map((component) => (
+                <div key={component.name} className="bg-gray-900/50 p-4 rounded-lg border border-gray-700/50">
+                  <div className="flex items-start gap-3 mb-2">
+                    <span className="text-2xl">{component.icon}</span>
                     <div>
-                      <h4 className="font-medium text-gray-200">{component.name}</h4>
-                      <p className="text-gray-400 text-sm">{component.description}</p>
+                      <h4 className="font-bold text-a855f7">{component.name}</h4>
+                      <p className="text-gray-300">{component.description}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="mt-6">
-              <h4 className="font-semibold text-gray-200 mb-2">Key Considerations:</h4>
-              <ul className="list-disc list-inside space-y-2 text-gray-300">
-                {topic.considerations.map((consideration, index) => (
-                  <li key={index}>{consideration}</li>
-                ))}
-              </ul>
+                  <ul className="list-disc list-inside space-y-1 text-gray-400 text-sm">
+                    {component.details.map((detail) => (
+                      <li key={detail}>{detail}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </div>
