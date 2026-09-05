@@ -1,119 +1,76 @@
 # Data Science Interview Prep
 
-A comprehensive web application designed to help data science candidates prepare for technical interviews. Built with React 18, TypeScript, Tailwind CSS, and Vite, featuring dark theme design with glassmorphism effects.
+A comprehensive web application designed to help candidates prepare for Data Science interviews. Covers Python coding challenges, statistics and probability, machine learning concepts, SQL queries, system design for ML, and behavioral interview questions using the STAR method.
 
 ## Features
 
-- **Python Coding Challenges**: 10 problems with expandable solutions
-- **Statistics & Probability**: Key formulas, hypothesis testing concepts with examples
-- **Machine Learning Questions**: 20 Q&A covering regression, classification, clustering, and neural networks
-- **SQL Queries**: 15 practice queries with joins, window functions, and CTEs
-- **System Design for ML**: Core concepts and architecture patterns
-- **Behavioral Questions**: STAR method framework with examples
-- **Global Search**: Filter questions across all sections
-- **Progress Tracking**: Visual progress indicator saved to localStorage
-- **Dark Theme**: Purple accent colors with glassmorphism UI
+- **Dark Theme with Glassmorphism**: Modern UI with purple accents and glass-effect cards
+- **Global Search**: Filter questions across all sections instantly
+- **Progress Tracking**: Visual circular progress bar saved to localStorage
+- **Tab Navigation**: Organized sections for easy access
+- **Interactive Content**: Expandable solutions, accordions, and Q&A formats
 - **Responsive Design**: Works on desktop and mobile devices
+- **Vercel Deployed**: Easy deployment and sharing
 
 ## Tech Stack
 
 - **Framework**: React 18 with TypeScript
-- **Styling**: Tailwind CSS 3 with custom dark theme
+- **Styling**: Tailwind CSS 3
 - **Build Tool**: Vite 4
 - **Deployment**: Vercel
 - **State Management**: React hooks with localStorage persistence
+
+## Sections
+
+1. **Python Coding Challenges** - 10 problems with hidden solutions
+2. **Statistics and Probability** - Formulas, hypothesis testing, examples
+3. **ML Questions** - 20 Q&A covering regression, classification, clustering, neural networks
+4. **SQL Queries** - 15 queries with joins, window functions, CTEs
+5. **System Design for ML** - Architecture and scalability concepts
+6. **Behavioral Questions** - STAR method preparation guide
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js >= 16
 - npm or yarn
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd data-science-interview-prep
-
-# Install dependencies
 npm install
+```
 
-# Start development server
+### Development
+
+```bash
 npm run dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000) to view the app in your browser.
 
 ### Building for Production
 
 ```bash
 npm run build
-npm run preview
 ```
 
-### Deployment to Vercel
+### Deployment
 
-1. Push code to GitHub/GitLab/Bitbucket
-2. Import project in Vercel dashboard
-3. Vercel will automatically detect the Vite configuration
-4. Deploy!
+The app is configured for Vercel deployment. Push to GitHub and connect to Vercel for automatic deployments.
 
-## Features in Detail
+## LocalStorage Usage
 
-### Progress Tracking
-- Overall completion percentage tracked via circular progress bar
-- Data persisted in localStorage across sessions
-- Visual feedback with purple gradient animation
-
-### Search Functionality
-- Global search bar filters content across all sections
-- Real-time filtering as you type
-- Highlights matching terms in results
-
-### UI/UX Design
-- Dark background (`#0f172a`) with purple gradient accents (`#a855f7` → `#9333ea`)
-- Glassmorphism cards with `rgba(255,255,255,0.05)` background and backdrop blur
-- Hover effects with scale and shadow transitions
-- Smooth fade-in animations on scroll
-- Purple underline on active tabs and hover states
-
-## File Structure
-
-```
-src/
-├── main.tsx          # App bootstrap
-├── App.tsx           # Main application component
-├── index.css         # Global Tailwind styles + custom variables
-├── components/       # Reusable UI components
-│   ├── Hero.tsx
-│   ├── SearchFilter.tsx
-│   ├── ProgressTracker.tsx
-│   ├── SectionTabs.tsx
-│   ├── PythonChallenges.tsx
-│   ├── StatisticsSection.tsx
-│   ├── MLQuestions.tsx
-│   ├── SQLQueries.tsx
-│   ├── SystemDesign.tsx
-│   └── Behavioral.tsx
-└── utils/            # Helper functions
-    ├── progress.ts
-    └── search.ts
-```
+- Progress tracking is saved per section and overall
+- Data persists between sessions
+- Clear browser data to reset progress
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing-feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Feel free to submit issues or pull requests to improve content or fix bugs.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Inspired by common data science interview questions from top tech companies
-- Built with ❤️ using modern web technologies
-- Special thanks to the React, Tailwind CSS, and Vercel teams
+MIT License - feel free to use and modify for your interview preparation needs.
+EOF
