@@ -9,91 +9,124 @@ const StatisticsSection: React.FC = () => {
       title: 'Central Limit Theorem',
       formula: 'σ_x̄ = σ/√n',
       description: 'States that the sampling distribution of the sample mean approaches a normal distribution as the sample size increases, regardless of the population distribution.',
-      example: 'If we take samples of size n=30 from a population with μ=50 and σ=10, the standard error is 10/√30 ≈ 1.83. The sample means will be normally distributed around 50 with SE=1.83.',
+      example: 'If we take samples of size n=30 from a population with mean μ=50 and σ=10, the standard error is σ_x̄ = 10/√30 ≈ 1.83. For 95% confidence, margin of error ≈ 1.96 * 1.83 ≈ 3.58.',
+      whenToUse: 'Use when making inferences about population means from sample data, especially with n ≥ 30.',
       keyPoints: [
         'Sample size n ≥ 30 is typically sufficient',
-        'Mean of sampling distribution = population mean',
-        'Standard error decreases with √n'
+        'Mean of sampling distribution = population mean μ',
+        'Standard error decreases as sample size increases'
       ]
     },
     {
       id: 'Hypothesis Testing',
       title: 'Hypothesis Testing',
       formula: 'z = (x̄ - μ) / (σ/√n)',
-      description: 'Statistical method to make decisions about population parameters based on sample data.',
-      example: 'Testing if a new drug reduces blood pressure: H₀: μ = 120 (no effect), H₁: μ < 120 (reduces BP). With x̄=115, σ=15, n=100 → z = (115-120)/(15/√100) = -3.33 → p < 0.001 → reject H₀.',
+      description: 'A method to test claims about population parameters using sample data.',
+      example: 'Testing if a new drug lowers blood pressure: H₀: μ = 120 (no effect), H₁: μ < 120 (lowers BP). With x̄=115, σ=15, n=100 → z = (115-120)/(15/√100) = -3.33. p-value ≈ 0.0004 < 0.05 → reject H₀.',
+      whenToUse: 'Use when you have a claim about a population parameter and want to assess evidence against it.',
       keyPoints: [
-        'Null hypothesis (H₀): status quo',
-        'Alternative hypothesis (H₁): claim to test',
-        'p-value < α (usually 0.05) → reject H₀',
-        'Type I error: false positive, Type II: false negative'
+        'Always state H₀ and H₁ clearly',
+        'Choose α (significance level) before testing',
+        'p-value < α → reject H₀; else fail to reject H₀'
       ]
     },
     {
       id: 'Confidence Intervals',
       title: 'Confidence Intervals',
       formula: 'x̄ ± z*(σ/√n)',
-      description: 'Range of values that likely contains the population parameter with a certain confidence level.',
-      example: '95% CI for mean height: x̄=170cm, σ=10cm, n=100 → 170 ± 1.96*(10/√100) = 170 ± 1.96 → [168.04, 171.96]',
+      description: 'A range of values that likely contains the population parameter with a certain level of confidence.',
+      example: 'For sample mean x̄=75, σ=10, n=25, 95% CI: 75 ± 1.96*(10/√25) = 75 ± 3.92 → (71.08, 78.92).',
+      whenToUse: 'Use when estimating population parameters from sample data and want to express uncertainty.',
       keyPoints: [
         'Higher confidence → wider interval',
-        'Larger n → narrower interval',
-        '95% CI uses z*=1.96 for large n'
+        'Larger sample size → narrower interval',
+        'Interpretation: 95% of CIs from repeated samples would contain true parameter'
       ]
     },
     {
-      id: 'Bayes Theorem',
-      title: 'Bayes Theorem',
-      formula: 'P(A|B) = [P(B|A) * P(A)] / P(B)',
-      description: 'Updates the probability of a hypothesis as more evidence becomes available.',
-      example: 'Medical test: Disease prevalence P(D)=0.01, Test sensitivity P(T+|D)=0.95, Specificity P(T-|¬D)=0.90 → P(D|T+) = (0.95*0.01)/[(0.95*0.01)+(0.10*0.99)] ≈ 0.0876 → 8.76%',
+      id: 'P-Value',
+      title: 'P-Value',
+      formula: 'P = P(observed or more extreme | H₀ true)',
+      description: 'The probability of obtaining test results at least as extreme as the observed results, assuming the null hypothesis is true.',
+      example: 'In a coin flip test (H₀: p=0.5), getting 18 heads in 20 flips: p-value = P(X≥18) + P(X≤2) ≈ 0.0004 (two-tailed).',
+      whenToUse: 'Use to quantify the strength of evidence against the null hypothesis.',
       keyPoints: [
-        'Prior probability P(A)',
-        'Likelihood P(B|A)',
-        'Marginal likelihood P(B)',
-        'Posterior P(A|B)'
+        'Small p-value (≤ 0.05) indicates strong evidence against H₀',
+        'Not the probability that H₀ is true',
+        'Depends on sample size and effect size'
+      ]
+    },
+    {
+      id: 'Type I & II Errors',
+      title: 'Type I & Type II Errors',
+      formula: 'α = P(Type I), β = P(Type II), Power = 1-β',
+      description: 'Type I: rejecting true H₀ (false positive). Type II: failing to reject false H₀ (false negative).',
+      example: 'Medical test: Type I = healthy person diagnosed sick (α). Type II = sick person declared healthy (β). Power = probability of correctly detecting disease.',
+      whenToUse: 'Use when designing tests to balance risks of false positives and false negatives.',
+      keyPoints: [
+        'α is controlled by researcher (typically 0.05)',
+        'β decreases as sample size or effect size increases',
+        'Power > 0.8 is generally desired'
       ]
     }
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
-        <h2 className="text-2xl font-bold text-a855f7 mb-4">Statistics & Probability</h2>
+    <section className="space-y-8">
+      <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 p-6">
+        <h2 className="text-2xl font-bold text-a855f7 mb-4">Statistics and Probability</h2>
+        <p className="text-gray-300 mb-6">Master core statistical concepts essential for data science interviews.</p>
+        
         <div className="space-y-4">
           {topics.map((topic) => (
-            <div
+            <button
               key={topic.id}
-              className={`px-4 py-3 rounded-lg cursor-pointer transition-all duration-200 ${
-                activeTopic === topic.id
-                  ? 'bg-a855f7/20 border-a855f7/50 text-a855f7'
-                  : 'bg-gray-800/30 border-gray-700/30 hover:bg-gray-800/50'
-              }`}
               onClick={() => setActiveTopic(topic.id)}
+              className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 ${
+                activeTopic === topic.id
+                  ? 'bg-a855f7/20 border border-a855f7/50 text-a855f7'
+                  : 'bg-gray-800/30 border border-gray-700/50 hover:bg-gray-800/40'
+              }`}
             >
-              <h3 className="font-semibold text-lg">{topic.title}</h3>
-              <p className="text-sm text-gray-400">{topic.formula}</p>
-            </div>
+              <div className="flex justify-between items-start">
+                <h3 className="font-semibold">{topic.title}</h3>
+                <span className="text-sm text-gray-400">{activeTopic === topic.id ? '▼' : '▶'}</span>
+              </div>
+            </button>
           ))}
         </div>
       </div>
 
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
-        <h3 className="text-xl font-bold text-a855f7 mb-4">{activeTopic}</h3>
-        <p className="text-gray-300 mb-4">{topics.find(t => t.id === activeTopic)?.description || ''}</p>
-        <div className="bg-gray-900/50 rounded-lg p-4 mb-4">
-          <p className="font-mono text-sm text-gray-200"><strong>Formula:</strong> {topics.find(t => t.id === activeTopic)?.formula || ''}</p>
+      {topics.map((topic) => (
+        <div
+          key={topic.id}
+          className={`hidden ${activeTopic === topic.id ? 'block fade-in' : ''}`}
+        >
+          <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 p-6">
+            <h3 className="text-xl font-bold text-a855f7 mb-4">{topic.title}</h3>
+            
+            <div className="bg-gray-900/50 p-4 rounded-lg mb-6">
+              <p className="font-mono text-sm text-gray-200"><strong>Formula:</strong> {topic.formula}</p>
+            </div>
+            
+            <p className="text-gray-300 mb-4"><strong>Description:</strong> {topic.description}</p>
+            
+            <p className="text-gray-300 mb-4"><strong>Example:</strong> {topic.example}</p>
+            
+            <p className="text-gray-300 mb-4"><strong>When to Use:</strong> {topic.whenToUse}</p>
+            
+            <div className="mt-6">
+              <h4 className="font-semibold text-gray-200 mb-2">Key Points:</h4>
+              <ul className="list-disc list-inside space-y-2 text-gray-300">
+                {topic.keyPoints.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-        <div className="space-y-3">
-          <p className="text-gray-300"><strong>Example:</strong> {topics.find(t => t.id === activeTopic)?.example || ''}</p>
-          <ul className="list-disc list-inside text-gray-300 space-y-1">
-            {topics.find(t => t.id === activeTopic)?.keyPoints.map((point, index) => (
-              <li key={index}>{point}</li>
-            )) || []}
-          </ul>
-        </div>
-      </div>
-    </div>
+      ))}
+    </section>
   );
 };
 
