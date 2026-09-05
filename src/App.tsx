@@ -12,8 +12,8 @@ import Behavioral from './components/Behavioral';
 import Footer from './components/Footer';
 
 function App() {
-  const [activeSection, setActiveSection] = useState('Python');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('Python');
+  const [searchQuery, setSearchQuery] = useState('');
   const [progress, setProgress] = useState(0);
 
   // Load progress from localStorage on mount
@@ -24,46 +24,40 @@ function App() {
     }
   }, []);
 
-  // Save progress to localStorage whenever it changes
+  // Save progress to localStorage on change
   useEffect(() => {
     localStorage.setItem('dsPrepProgress', progress.toString());
   }, [progress]);
 
-  const handleSectionChange = (section: string) => {
-    setActiveSection(section);
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
   };
 
-  const handleSearchChange = (term: string) => {
-    setSearchTerm(term);
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
   };
 
-  const handleProgressUpdate = (newProgress: number) => {
-    setProgress(newProgress);
+  // Simulate progress update (in real app, this would be based on completed items)
+  const updateProgress = () => {
+    setProgress(Math.min(progress + 5, 100));
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white font-sans antialiased">
       <HeroSection />
-      <SearchFilter onSearchChange={handleSearchChange} />
-      <ProgressTracker progress={progress} onProgressUpdate={handleProgressUpdate} />
+      <SearchFilter onSearch={handleSearch} query={searchQuery} />
+      <ProgressTracker progress={progress} onUpdateProgress={updateProgress} />
       <SectionTabs 
-        activeSection={activeSection} 
-        onSectionChange={handleSectionChange} 
+        activeTab={activeTab} 
+        onTabChange={handleTabChange} 
       />
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {searchTerm && (
-          <div className="mb-4 bg-gray-800/50 rounded-lg p-3 text-sm">
-            Showing results for: "<span className="text-a855f7">{searchTerm}</span>"
-          </div>
-        )}
-        <div className="space-y-8">
-          {activeSection === 'Python' && <PythonChallenges onProgressUpdate={handleProgressUpdate} />}
-          {activeSection === 'Statistics' && <StatisticsSection onProgressUpdate={handleProgressUpdate} />}
-          {activeSection === 'ML' && <MLQuestions onProgressUpdate={handleProgressUpdate} />}
-          {activeSection === 'SQL' && <SQLQueries onProgressUpdate={handleProgressUpdate} />}
-          {activeSection === 'SystemDesign' && <SystemDesign onProgressUpdate={handleProgressUpdate} />}
-          {activeSection === 'Behavioral' && <Behavioral onProgressUpdate={handleProgressUpdate} />}
-        </div>
+        {activeTab === 'Python' && <PythonChallenges searchQuery={searchQuery} />}
+        {activeTab === 'Statistics' && <StatisticsSection searchQuery={searchQuery} />}
+        {activeTab === 'ML' && <MLQuestions searchQuery={searchQuery} />}
+        {activeTab === 'SQL' && <SQLQueries searchQuery={searchQuery} />}
+        {activeTab === 'SystemDesign' && <SystemDesign searchQuery={searchQuery} />}
+        {activeTab === 'Behavioral' && <Behavioral searchQuery={searchQuery} />}
       </main>
       <Footer />
     </div>
