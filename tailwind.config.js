@@ -14,9 +14,12 @@ module.exports = {
           700: '#7e3af2',
         }
       },
-      backgroundImage: {
-        'hero-gradient': 'linear-gradient(to right, #a855f7, #9333ea)',
-        'glass': 'rgba(255, 255, 255, 0.05)'
+      boxShadow: {
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        'glass-hover': '0 12px 40px 0 rgba(31, 38, 135, 0.5)'
+      },
+      backdropBlur: {
+        'glass': '8px'
       }
     }
   },
