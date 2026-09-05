@@ -1,7 +1,7 @@
 {
   "name": "data-science-interview-prep",
   "version": "1.0.0",
-  "description": "A comprehensive web app for data science interview preparation with Python, Statistics, ML, SQL, System Design, and Behavioral questions",
+  "description": "A comprehensive Data Science interview preparation web app with Python, Statistics, ML, SQL, System Design, and Behavioral sections",
   "main": "src/main.tsx",
   "scripts": {
     "dev": "vite",
