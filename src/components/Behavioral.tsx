@@ -1,135 +1,151 @@
 import React, { useState } from 'react';
 
-const Behavioral: React.FC = () => {
-  const [activeQuestion, setActiveQuestion] = useState<string>('Tell me about a time you failed.');
-  const [showSTAR, setShowSTAR] = useState<boolean>(false);
-
-  const questions = [
-    {
-      id: 'Tell me about a time you failed.',
-      question: 'Tell me about a time you failed.',
-      star: {
-        situation: 'In my previous role as a data scientist at XYZ Corp, I was tasked with building a churn prediction model for our subscription service within a tight 4-week deadline.',
-        task: 'I needed to deliver a production-ready model with >85% accuracy to help the marketing team target at-risk customers.',
-        action: 'I rushed the feature engineering process, used only basic demographic features, and skipped proper validation. I deployed the model after just 2 weeks, but it performed poorly in production with only 60% accuracy.',
-        result: 'The model failed to identify true churn risks, leading to wasted marketing spend. I learned to always allocate time for proper EDA, feature importance analysis, and cross-validation. I now advocate for realistic timelines and use MLOps practices for reliable deployment.'
-      }
-    },
-    {
-      id: 'Tell me about a time you had to learn a new technology quickly.',
-      question: 'Tell me about a time you had to learn a new technology quickly.',
-      star: {
-        situation: 'Our team decided to migrate from Python-based batch processing to Apache Spark for real-time analytics, but I had no prior experience with Spark.',
-        task: 'I needed to become proficient in Spark within two weeks to contribute to the migration project and rewrite our ETL pipelines.',
-        action: 'I completed the Databricks Spark certification course, built small proof-of-concept projects with sample data, pair-programmed with a senior engineer, and contributed to non-critical pipelines first.',
-        result: 'Within three weeks, I was able to rewrite our main ETL pipeline in Spark, improving processing time by 70%. The migration was completed on schedule, and I became the go-to person for Spark questions on the team.'
-      }
-    },
-    {
-      id: 'Describe a situation where you had to work with a difficult team member.',
-      question: 'Describe a situation where you had to work with a difficult team member.',
-      star: {
-        situation: 'I was working on a cross-functional project with a senior data engineer who was resistant to adopting new ML practices and preferred traditional SQL-based approaches.',
-        task: 'I needed to collaborate effectively to integrate ML features into our data pipeline without causing conflict or delaying the project.',
-        action: 'I scheduled a one-on-one meeting to understand their concerns, demonstrated how ML features could improve their existing workflows, started with small incremental changes, and gave them ownership over the validation process.',
-        result: 'The engineer became an advocate for the ML integration, we successfully deployed the enhanced pipeline, and our collaboration improved significantly. This taught me the importance of empathy and finding common ground in technical disagreements.'
-      }
-    },
-    {
-      id: 'Tell me about a time you had to meet a tight deadline.',
-      question: 'Tell me about a time you had to meet a tight deadline.',
-      star: {
-        situation: 'Our marketing team needed customer segmentation insights for a campaign launching in just 5 days, but the data was scattered across multiple systems.',
-        task: 'I had to extract, clean, and analyze customer data from 3 different sources, build segmentation models, and deliver actionable insights within the 5-day window.',
-        action: 'I prioritized the most critical data sources, used automated data profiling tools to quickly assess quality, built a simple but effective RFM segmentation model, and delivered daily progress updates to stakeholders.',
-        result: 'I delivered the segmentation insights on time, the marketing campaign used the segments to increase conversion by 22%, and I established a streamlined process for future rapid-turnaround requests.'
-      }
-    },
-    {
-      id: 'Give an example of how you handled ambiguity in a project.',
-      question: 'Give an example of how you handled ambiguity in a project.',
-      star: {
-        situation: 'I was assigned to improve user engagement on our platform, but the leadership team had conflicting ideas about what \"engagement\" meant and which metrics to prioritize.',
-        task: 'I needed to clarify the project goals, define measurable objectives, and propose a solution that would satisfy stakeholders despite the initial ambiguity.',
-        action: 'I organized a workshop with stakeholders to define engagement metrics, analyzed historical data to correlate different behaviors with long-term retention, proposed a hybrid metric combining depth and frequency of use, and got buy-in through data-driven justification.',
-        result: 'We established clear engagement metrics that aligned with business goals, the resulting feature increase user retention by 18%, and the process became a template for handling ambiguous projects in the future.'
-      }
+const behavioralQuestions = [
+  {
+    id: 1,
+    question: "Tell me about a time you failed.",
+    star: {
+      situation: "In my previous role as a data analyst, I was tasked with building a predictive model to forecast quarterly sales for a retail client.",
+      task: "The goal was to achieve at least 90% accuracy to help optimize inventory management and reduce overstock costs.",
+      action: "I rushed the feature engineering process, used only basic statistical models without proper validation, and didn't involve stakeholders early enough to understand business nuances.",
+      result: "The model achieved only 65% accuracy, leading to poor inventory decisions. I learned to allocate more time for exploratory data analysis, use cross-validation, and maintain regular stakeholder communication."
     }
-    // In a real app, you'd have more questions - here we show 5 for brevity but structure supports expansion
-  ];
+  },
+  {
+    id: 2,
+    question: "Describe a situation where you had to work with a difficult team member.",
+    star: {
+      situation: "During a machine learning project, I was paired with a senior engineer who preferred to work independently and often dismissed suggestions from junior team members.",
+      task: "We needed to collaborate effectively to deliver a production-ready model within a tight deadline while maintaining team cohesion.",
+      action: "I scheduled regular one-on-one meetings to understand their perspective, communicated my ideas clearly with supporting evidence, and found common ground by focusing on shared goals.",
+      result: "We improved our communication, combined our strengths (their deep learning expertise and my feature engineering skills), and delivered the model two days ahead of schedule with 94% accuracy."
+    }
+  },
+  {
+    id: 3,
+    question: "Tell me about a time you had to learn a new technology quickly.",
+    star: {
+      situation: "Our team decided to migrate from traditional SQL databases to a cloud-based data warehouse (Snowflake) for better scalability and performance.",
+      task: "I needed to become proficient in Snowflake within two weeks to lead the migration effort and train other team members.",
+      action: "I completed official Snowflake training courses, practiced with sample datasets, built a prototype migration pipeline, and created internal documentation.",
+      result: "I successfully led the migration, reduced query processing time by 60%, and conducted training sessions that enabled the team to become productive within a week."
+    }
+  },
+  {
+    id: 4,
+    question: "Describe a time you had to explain a complex technical concept to a non-technical audience.",
+    star: {
+      situation: "I needed to present the results of a customer segmentation model to the marketing team, who had limited background in machine learning.",
+      task: "Explain how the model works, what the segments mean, and how they can use this information to improve campaign targeting.",
+      action: "I used analogies (comparing segments to customer 'personas'), visualizations (cluster plots and characteristic bar charts), and focused on business implications rather than mathematical details.",
+      result: "The marketing team understood the segments, created targeted campaigns for each group, and increased conversion rates by 25% in the following quarter."
+    }
+  },
+  {
+    id: 5,
+    question: "Tell me about a time you had to meet a tight deadline.",
+    star: {
+      situation: "A client requested an urgent analysis to understand why their latest marketing campaign underperformed, with results needed in 48 hours for an executive meeting.",
+      task: "Deliver actionable insights on campaign performance, audience engagement, and ROI within the tight timeframe.",
+      action: "I prioritized key metrics, automated repetitive data cleaning tasks with Python scripts, used exploratory data analysis to quickly identify patterns, and prepared a concise presentation with clear recommendations.",
+      result: "I delivered the analysis within 36 hours, identified that the campaign missed its target audience due to incorrect targeting parameters, and provided specific recommendations that improved the next campaign's ROI by 35%."
+    }
+  }
+];
 
-  const handleQuestionSelect = (questionId: string) => {
-    setActiveQuestion(questionId);
-    setShowSTAR(false);
-  };
+const Behavioral: React.FC = () => {
+  const [activeQuestion, setActiveQuestion] = useState(behavioralQuestions[0]);
+  const [showStar, setShowStar] = useState(false);
 
   return (
-    <div className="space-y-6">
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
+    <section className="space-y-8">
+      <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 p-6">
         <h2 className="text-2xl font-bold text-a855f7 mb-4">Behavioral Questions (STAR Method)</h2>
-        <p className="text-gray-400 mb-4">Prepare your stories using Situation, Task, Action, Result framework</p>
+        <p className="text-gray-300 mb-6">Prepare for behavioral interviews using the Situation-Task-Action-Result framework.</p>
         
-        <div className="space-y-3">
-          {questions.map((q) => (
-            <div
-              key={q.id}
-              className={`cursor-pointer p-4 rounded-lg border transition-all duration-200 ${
-                activeQuestion === q.id
-                  ? 'bg-a855f7/20 border-a855f7/50'
-                  : 'bg-gray-800/30 border-gray-700/30 hover:bg-gray-800/50'
+        <div className="space-y-4">
+          {behavioralQuestions.map((question) => (
+            <button
+              key={question.id}
+              onClick={() => {
+                setActiveQuestion(question);
+                setShowStar(false);
+              }}
+              className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 ${
+                activeQuestion.id === question.id
+                  ? 'bg-a855f7/20 border border-a855f7/50 text-a855f7'
+                  : 'bg-gray-800/30 border border-gray-700/50 hover:bg-gray-800/40'
               }`}
-              onClick={() => handleQuestionSelect(q.id)}
             >
-              <h3 className="font-semibold text-lg">{q.question}</h3>
-            </div>
+              <div className="flex justify-between items-start">
+                <h3 className="font-semibold">Question {question.id}</h3>
+                <span className="text-sm text-gray-400">{showStar && activeQuestion.id === question.id ? '▼' : '▶'}</span>
+              </div>
+              <p className="text-sm text-gray-400 mt-1 truncate">{question.question}</p>
+            </button>
           ))}
         </div>
       </div>
 
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6">
-        {!showSTAR && (
-          <button
-            onClick={() => setShowSTAR(true)}
-            className="bg-a855f7/20 hover:bg-a855f7/30 text-a855f7 px-6 py-3 rounded-lg transition-colors w-full"
-          >
-            Show STAR Framework
-          </button>
-        )}
-        
-        {showSTAR && (
-          <div className="space-y-4">
-            <div className="bg-gray-900/50 rounded-lg p-4">
-              <h3 className="text-xl font-bold text-a855f7 mb-3">Situation</h3>
-              <p className="text-gray-300">{questions.find(q => q.id === activeQuestion)?.star.situation || ''}</p>
+      {behavioralQuestions.map((question) => (
+        <div
+          key={question.id}
+          className={`hidden ${activeQuestion.id === question.id && showStar ? 'block fade-in' : ''}`}
+        >
+          <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 p-6">
+            <h3 className="text-xl font-bold text-a855f7 mb-4">{activeQuestion.question}</h3>
+            
+            <div className="space-y-5">
+              <div>
+                <h4 className="font-semibold text-gray-200 mb-2">Situation:</h4>
+                <p className="text-gray-300">{activeQuestion.star.situation}</p>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold text-gray-200 mb-2">Task:</h4>
+                <p className="text-gray-300">{activeQuestion.star.task}</p>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold text-gray-200 mb-2">Action:</h4>
+                <p className="text-gray-300">{activeQuestion.star.action}</p>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold text-gray-200 mb-2">Result:</h4>
+                <p className="text-gray-300">{activeQuestion.star.result}</p>
+              </div>
             </div>
             
-            <div className="bg-gray-900/50 rounded-lg p-4">
-              <h3 className="text-xl font-bold text-a855f7 mb-3">Task</h3>
-              <p className="text-gray-300">{questions.find(q => q.id === activeQuestion)?.star.task || ''}</p>
-            </div>
-            
-            <div className="bg-gray-900/50 rounded-lg p-4">
-              <h3 className="text-xl font-bold text-a855f7 mb-3">Action</h3>
-              <p className="text-gray-300">{questions.find(q => q.id === activeQuestion)?.star.action || ''}</p>
-            </div>
-            
-            <div className="bg-gray-900/50 rounded-lg p-4">
-              <h3 className="text-xl font-bold text-a855f7 mb-3">Result</h3>
-              <p className="text-gray-300">{questions.find(q => q.id === activeQuestion)?.star.result || ''}</p>
-            </div>
-            
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => setShowSTAR(false)}
-                className="bg-gray-800/30 hover:bg-gray-800/50 text-gray-300 px-6 py-3 rounded-lg transition-colors"
-              >
-                Hide STAR Framework
-              </button>
+            <div className="mt-6 p-4 bg-gray-900/50 rounded-lg">
+              <h4 className="font-semibold text-gray-200 mb-2">STAR Method Tips:</h4>
+              <ul className="list-disc list-inside space-y-2 text-gray-300">
+                <li>Be specific and concise - focus on your individual contributions</li>
+                <li>Use metrics and quantifiable results when possible</li>
+                <li>Choose examples that demonstrate relevant skills for the role</li>
+                <li>Practice your stories to deliver them naturally</li>
+                <li>Reflect on what you learned from each experience</li>
+              </ul>
             </div>
           </div>
-        )}
+        </div>
+      ))}
+      
+      <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 p-6">
+        <div className="flex justify-between items-center">
+          <button
+            onClick={() => setShowStar(!showStar)}
+            className="px-4 py-2 bg-a855f7/20 border border-a855f7/50 text-a855f7 rounded-lg hover:bg-a855f7/30 transition-colors"
+          >
+            {showStar ? 'Hide STAR Breakdown' : 'Show STAR Breakdown'}
+          </button>
+          
+          <span className="text-sm text-gray-400">
+            {behavioralQuestions.length} behavioral questions prepared
+          </span>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
