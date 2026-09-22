@@ -45,7 +45,7 @@ def mat_mul(A: List[List[float]], B: List[List[float]]) -> List[List[float]]:
     cols_b = len(B[0])
     result = [[0.0] * cols_b for _ in range(rows_a)]
     for i in range(rows_a):
-        for k in in range(cols_a):
+        for k in range(cols_a):
             if A[i][k] == 0:
                 continue
             for j in range(cols_b):
