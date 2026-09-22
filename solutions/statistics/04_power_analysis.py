@@ -107,14 +107,9 @@ def sample_size_two_proportion(
     p2 = p_treatment
     diff = abs(p2 - p1)
 
-    # Pooled proportion for the variance under H0
-    p_pool = (p1 + p2) / 2
-    variance_pooled = p_pool * (1 - p_pool)
-
     # Unpooled variance for the variance under H1
     variance_unpooled = p1 * (1 - p1) + p2 * (1 - p2)
 
-    # Use the unpooled variance (more conservative)
     n = ((z_alpha + z_beta) ** 2 * variance_unpooled) / (diff ** 2)
 
     # Round up to the nearest integer
@@ -193,6 +188,7 @@ def power_two_proportion(
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     # The classic example: 10% to 10.5% (5% relative lift)
+    # This requires a large sample because the absolute difference is small
     result = sample_size_two_proportion(
         p_control=0.10,
         p_treatment=0.105,
@@ -200,9 +196,8 @@ if __name__ == "__main__":
         power=0.80,
     )
     print(result)
-    # Expected: ~30,000+ per group
-    assert result.n_per_group > 20000
-    assert result.n_per_group < 50000
+    # Expected: ~57,000 per group (small absolute difference = large n)
+    assert 50000 < result.n_per_group < 65000
 
     # Larger effect: 10% to 12% (20% relative lift)
     result2 = sample_size_two_proportion(
