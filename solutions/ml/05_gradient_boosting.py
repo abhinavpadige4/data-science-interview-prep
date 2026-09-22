@@ -28,8 +28,12 @@ def squared_error_loss(y_true: List[float], y_pred: List[float]) -> float:
 
 
 def squared_error_gradient(y_true: List[float], y_pred: List[float]) -> List[float]:
-    """Negative gradient of MSE loss: 2 * (y_pred - y_true)."""
-    return [2 * (y_pred[i] - y_true[i]) for i in range(len(y_true))]
+    """Negative gradient of MSE loss: y_true - y_pred.
+
+    For L = (1/2) * (y - F)^2, the gradient w.r.t. F is -(y - F) = F - y.
+    The negative gradient (pseudo-residuals) is y - F.
+    """
+    return [y_true[i] - y_pred[i] for i in range(len(y_true))]
 
 
 class SimpleTree:
