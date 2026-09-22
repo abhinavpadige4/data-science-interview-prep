@@ -145,18 +145,19 @@ def two_proportion_z_test(
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     # The classic example from the problem statement
+    # 12.0% vs 13.5% with 10,000 per group IS significant
     result = two_proportion_z_test(
         successes_a=1200, n_a=10000,
         successes_b=1350, n_b=10000,
         alpha=0.05,
     )
     print(result)
-    # Expected: z ≈ 1.73, p ≈ 0.083, NOT significant at α=0.05
-    assert abs(result.z_statistic - 1.73) < 0.1
-    assert 0.07 < result.p_value < 0.10
-    assert not result.significant
+    # Expected: z ≈ 3.18, p ≈ 0.0015, SIGNIFICANT at α=0.05
+    assert abs(result.z_statistic - 3.18) < 0.1
+    assert result.p_value < 0.01
+    assert result.significant
 
-    # A clearly significant result
+    # A clearly significant result (larger effect)
     result2 = two_proportion_z_test(
         successes_a=1000, n_a=10000,
         successes_b=1500, n_b=10000,
@@ -166,27 +167,39 @@ if __name__ == "__main__":
     assert result2.significant
     assert result2.p_value < 0.001
 
-    # No difference
+    # A NOT significant result (smaller effect)
     result3 = two_proportion_z_test(
+        successes_a=1200, n_a=10000,
+        successes_b=1250, n_b=10000,
+        alpha=0.05,
+    )
+    print(result3)
+    # Expected: z ≈ 0.54, p ≈ 0.58, NOT significant
+    assert abs(result3.z_statistic - 0.54) < 0.1
+    assert result3.p_value > 0.5
+    assert not result3.significant
+
+    # No difference
+    result4 = two_proportion_z_test(
         successes_a=1000, n_a=10000,
         successes_b=1000, n_b=10000,
     )
-    assert abs(result3.z_statistic) < 1e-9
-    assert result3.p_value > 0.99
+    assert abs(result4.z_statistic) < 1e-9
+    assert result4.p_value > 0.99
 
     # One-sided test
-    result4 = two_proportion_z_test(
+    result5 = two_proportion_z_test(
         successes_a=1200, n_a=10000,
         successes_b=1350, n_b=10000,
         alpha=0.05,
         two_sided=False,
     )
     # One-sided p should be half of two-sided
-    assert abs(result4.p_value - result.p_value / 2) < 1e-6
+    assert abs(result5.p_value - result.p_value / 2) < 1e-6
 
     # Edge case: zero successes
-    result5 = two_proportion_z_test(0, 100, 0, 100)
-    assert abs(result5.z_statistic) < 1e-9
+    result6 = two_proportion_z_test(0, 100, 0, 100)
+    assert abs(result6.z_statistic) < 1e-9
 
     # Verify normal_cdf and normal_ppf are inverses
     for x in [-2, -1, 0, 1, 2]:
